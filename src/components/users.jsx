@@ -11,7 +11,8 @@ const Users = () => {
   };
 
   const renderPhrase = (number) => {
-    let people = users.length > 4 ? " человек" : " человека";
+    let people =
+      users.length > 4 || users.length === 1 ? " человек" : " человека";
     let color = users.length > 0 ? "bg-primary" : "bg-danger";
     return (
       <h1 className={"badge fs-4 " + color}>
@@ -32,44 +33,48 @@ const Users = () => {
   return (
     <>
       {renderPhrase(users.length)}
-      <table className="table">
-        <thead>
-          <tr>
-            <th scope="col">Имя</th>
-            <th scope="col">Качества</th>
-            <th scope="col">Профессия</th>
-            <th scope="col">Встретился раз</th>
-            <th scope="col">Оценка</th>
-            <th scope="col"></th>
-          </tr>
-        </thead>
-        <tbody>
-          {users.map((user) => (
-            <tr key={user._id}>
-              <td>{user.name}</td>
-              <td>
-                {user.qualities.map((qual) => (
-                  <span className={classes(qual)} key={qual._id}>
-                    {qual.name}
-                  </span>
-                ))}
-              </td>
-
-              <td key={user.profession._id}>{user.profession.name}</td>
-              <td>{user.completedMeetings}</td>
-              <td>{user.rate}</td>
-              <td>
-                <button
-                  className="btn btn-danger"
-                  onClick={() => handleDelete(user._id)}
-                >
-                  Удалить
-                </button>
-              </td>
+      {users.length > 0 ? (
+        <table className="table">
+          <thead>
+            <tr>
+              <th scope="col">Имя</th>
+              <th scope="col">Качества</th>
+              <th scope="col">Профессия</th>
+              <th scope="col">Встретился раз</th>
+              <th scope="col">Оценка</th>
+              <th scope="col"></th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {users.map((user) => (
+              <tr key={user._id}>
+                <td>{user.name}</td>
+                <td>
+                  {user.qualities.map((qual) => (
+                    <span className={classes(qual)} key={qual._id}>
+                      {qual.name}
+                    </span>
+                  ))}
+                </td>
+
+                <td key={user.profession._id}>{user.profession.name}</td>
+                <td>{user.completedMeetings}</td>
+                <td>{user.rate}</td>
+                <td>
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => handleDelete(user._id)}
+                  >
+                    Удалить
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : (
+        false
+      )}
     </>
   );
 };
