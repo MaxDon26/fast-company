@@ -31,12 +31,13 @@ const Pagination = ({ itemsCount, pageSize, onPageChange, currentPage }) => {
             </ul>
         </nav>
     );
-    Pagination.propTypes = {
-        itemsCount: PropTypes.number.isRequired,
-        pageSize: PropTypes.number.isRequired,
-        onPageChange: PropTypes.func.isRequired,
-        currentPage: PropTypes.number.isRequired
-    };
+};
+
+Pagination.propTypes = {
+    itemsCount: PropTypes.number.isRequired,
+    pageSize: PropTypes.number.isRequired,
+    onPageChange: PropTypes.func.isRequired,
+    currentPage: PropTypes.number.isRequired
 };
 
 export default Pagination;

@@ -3,6 +3,7 @@ import { paginate } from "../utils/paginate";
 import Pagination from "./pagination";
 import SearchStatus from "./searchStatus";
 import User from "./user";
+import PropTypes from "prop-types";
 
 const Users = ({ users, ...rest }) => {
     const count = users.length;
@@ -50,4 +51,7 @@ const Users = ({ users, ...rest }) => {
     );
 };
 
+Users.propTypes = {
+    users: PropTypes.array.isRequired
+};
 export default Users;
