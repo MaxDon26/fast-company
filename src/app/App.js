@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Users from "./components/users";
-import API from "./api";
+import api from "./api";
 
 function App() {
-    const [users, setUsers] = useState(API.users.fetchAll());
+    const [users, setUsers] = useState();
+
+    useEffect(() => {
+        api.users.fetchAll().then((data) => setUsers(data));
+    }, []);
+
     const handleDelete = (userId) => {
         setUsers((prevState) =>
             prevState.filter((user) => {
@@ -24,11 +29,15 @@ function App() {
     };
 
     return (
-        <Users
-            users={users}
-            onDelete={handleDelete}
-            onToogleBookmark={handleToogleBookmark}
-        />
+        <div>
+            {users && (
+                <Users
+                    users={users}
+                    onDelete={handleDelete}
+                    onToogleBookmark={handleToogleBookmark}
+                />
+            )}
+        </div>
     );
 }
 
